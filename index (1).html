@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promoções do Supermercado</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .painel {
+      text-align: center;
+      border: 5px solid red;
+      border-radius: 20px;
+      padding: 30px;
+      background-color: #400;
+      max-width: 90%;
+    }
+    .produto {
+      font-size: 3em;
+      font-weight: bold;
+    }
+    .preco {
+      font-size: 2em;
+      color: yellow;
+      margin-top: 10px;
+    }
+    .validade {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #ccc;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel" id="painel">
+    <div class="produto">Carregando promoção...</div>
+  </div>
+
+  <script>
+    const promocoes = [
+      { produto: "Contra Filé Bovino", preco: "De R$ 49,90 por R$ 38,90/kg", validade: "30/05" },
+      { produto: "Frango Resfriado Inteiro", preco: "R$ 8,90/kg", validade: "31/05" },
+      { produto: "Linguiça Toscana", preco: "R$ 17,90/kg", validade: "29/05" }
+    ];
+
+    let index = 0;
+    const painel = document.getElementById("painel");
+
+    function atualizarPainel() {
+      const p = promocoes[index];
+      painel.innerHTML = `
+        <div class="produto">${p.produto}</div>
+        <div class="preco">${p.preco}</div>
+        <div class="validade">Válido até: ${p.validade}</div>
+      `;
+      index = (index + 1) % promocoes.length;
+    }
+
+    atualizarPainel();
+    setInterval(atualizarPainel, 5000); // Troca a cada 5 segundos
+  </script>
+</body>
+</html>
