@@ -2,79 +2,294 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Ofertas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Ofertas - Piovani</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #fff;
+      overflow: hidden;
     }
-    .painel {
-      background: linear-gradient(145deg, #c60000, #800000);
-      color: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.4);
+    }
+    .wrapper {
+      width: 100vw;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      background: #FFD700;
+      color: #000;
+      padding: 10px;
       text-align: center;
-      max-width: 800px;
-      width: 90%;
-      animation: fadeIn 1s ease-in-out;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+    .carrossel {
+      display: flex;
+      transition: transform 1s ease-in-out;
+      width: 100vw;
+    }
+    .setor {
+      width: 100vw;
+      padding: 20px;
+      position: relative;
+    }
+    .titulo {
+      font-size: 2.5rem;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      margin: 20px 0 25px;
+      animation: entradaTitulo 1s ease-out;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      border-radius: 25px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+      position: relative;
+      min-height: 180px;
+      animation: fadeIn 1s ease;
+    }
+    .icone {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1.3rem;
     }
     .produto {
-      font-family: 'Anton', sans-serif;
-      font-size: 4rem;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
     }
     .preco {
-      font-size: 3rem;
+      font-size: 2.4rem;
       color: #FFD700;
       font-weight: bold;
-      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 8px #FFD700;
     }
     .validade {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .selo {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: linear-gradient(to bottom, #ff0, #e6c200);
+      color: #b30000;
+      padding: 8px 14px;
+      font-weight: bold;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      animation: flutuar 1.6s infinite ease-in-out;
+    }
+    .rodape {
+      width: 100%;
+      text-align: center;
+      padding: 12px 0;
+      background: #000;
+      font-size: 1rem;
+      color: #fff;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .logo {
+      position: fixed;
+      bottom: 10px;
+      right: 20px;
+      width: 120px;
+      z-index: 998;
+    }
+    .relogio {
+      position: fixed;
+      top: 10px;
+      right: 20px;
       font-size: 1.5rem;
-      color: #cccccc;
+      font-weight: bold;
+      background: #FFD700;
+      color: #000;
+      padding: 5px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-  </style>
+    @keyframes flutuar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+    @keyframes entradaTitulo {
+      from { opacity: 0; transform: translateX(-100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  
+body::before {
+  content: "";
+  background: url('https://cdn.pixabay.com/photo/2017/08/30/07/52/wood-2697780_1280.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+</style>
 </head>
 <body>
-  <div class="painel" id="painel">
-    <div class="produto">Carregando...</div>
+  
+  <div class="wrapper">
+    <div class="topbar">PIOVANI SUPERMERCADOS JB • SUA ECONOMIA É AQUI</div>
+    <div class="carrossel" id="carrossel"><div class="setor"><div class="titulo" style="background:#B30000;color:#000">Ofertas do Açougue</div><div class="grid">
+        <div class="card" style="background:#B30000">
+            <div class="icone">🥩</div>
+            <div class="selo">-30%</div>
+            <div class="produto">Contra Filé</div>
+            <div class="preco">R$ 38,90/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div>
+        <div class="card" style="background:#B30000">
+            <div class="icone">🐔</div>
+            <div class="selo">-10%</div>
+            <div class="produto">Frango Resfriado</div>
+            <div class="preco">R$ 8,90/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div>
+        <div class="card" style="background:#B30000">
+            <div class="icone">🌭</div>
+            <div class="selo">-25%</div>
+            <div class="produto">Linguiça Toscana</div>
+            <div class="preco">R$ 17,90/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div>
+        <div class="card" style="background:#B30000">
+            <div class="icone">🥩</div>
+            <div class="selo">-20%</div>
+            <div class="produto">Carne Moída</div>
+            <div class="preco">R$ 21,00/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div>
+        <div class="card" style="background:#B30000">
+            <div class="icone">🍖</div>
+            <div class="selo">-15%</div>
+            <div class="produto">Costela Bovina</div>
+            <div class="preco">R$ 26,50/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div>
+        <div class="card" style="background:#B30000">
+            <div class="icone">🍗</div>
+            <div class="selo">-18%</div>
+            <div class="produto">Coxinha da Asa</div>
+            <div class="preco">R$ 12,00/kg</div>
+            <div class="validade">Válido até: 30/05</div>
+        </div></div></div></div>
+    <div class="rodape">Ofertas válidas somente hoje • Consulte condições no caixa</div>
+    <img src="logopiovani.PNG" class="logo" />
+    <div class="relogio" id="relogio">--:--</div>
   </div>
-
   <script>
-    const promocoes = [
-      { produto: "Contra Filé Bovino", preco: "De R$ 49,90 por R$ 38,90/kg", validade: "30/05" },
-      { produto: "Frango Resfriado", preco: "R$ 8,90/kg", validade: "31/05" },
-      { produto: "Linguiça Toscana", preco: "R$ 17,90/kg", validade: "29/05" }
-    ];
+    function atualizaRelogio() {
+      const agora = new Date();
+      const h = agora.getHours().toString().padStart(2, '0');
+      const m = agora.getMinutes().toString().padStart(2, '0');
+      document.getElementById('relogio').textContent = `${h}:${m}`;
+    }
+    setInterval(atualizaRelogio, 1000);
+    atualizaRelogio();
 
-    let index = 0;
-    const painel = document.getElementById("painel");
-
-    function atualizarPainel() {
-      const p = promocoes[index];
-      painel.innerHTML = `
-        <div class="produto">${p.produto}</div>
-        <div class="preco">${p.preco}</div>
-        <div class="validade">Válido até: ${p.validade}</div>
-      `;
-      index = (index + 1) % promocoes.length;
+    function corDoSetor(nome) {
+      if (nome.includes("Açougue")) return "#B30000";
+      if (nome.includes("Padaria")) return "#F5DEB3";
+      if (nome.includes("Hortifruti")) return "#228B22";
+      if (nome.includes("Limpeza")) return "#1E90FF";
+      return "#444";
     }
 
-    atualizarPainel();
-    setInterval(atualizarPainel, 5000);
+    async function carregarOfertas() {
+      const resposta = await fetch('produtos.json');
+      const dados = await resposta.json();
+      const carrossel = document.getElementById('carrossel');
+
+      Object.keys(dados).forEach(setor => {
+        const setorDiv = document.createElement('div');
+        setorDiv.className = 'setor';
+
+        const titulo = document.createElement('div');
+        titulo.className = 'titulo';
+        titulo.textContent = `Ofertas do ${setor}`;
+        titulo.style.background = corDoSetor(setor);
+        titulo.style.color = '#000';
+
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+
+        dados[setor].forEach(produto => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.style.background = corDoSetor(setor);
+
+          card.innerHTML = `
+            <div class="icone">${produto.icone}</div>
+            <div class="selo">${produto.selo}</div>
+            <div class="produto">${produto.produto}</div>
+            <div class="preco">${produto.preco}</div>
+            <div class="validade">Válido até: ${produto.validade}</div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        setorDiv.appendChild(titulo);
+        setorDiv.appendChild(grid);
+        carrossel.appendChild(setorDiv);
+      });
+    }
+
+    carregarOfertas();
+
+    setTimeout(() => {
+      const carrossel = document.getElementById('carrossel');
+      const setores = document.querySelectorAll('.setor');
+      let atual = 0;
+      setInterval(() => {
+        atual = (atual + 1) % setores.length;
+        carrossel.style.transform = `translateX(-${atual * 100}vw)`;
+      }, 10000);
+    }, 1000);
   </script>
 </body>
 </html>
