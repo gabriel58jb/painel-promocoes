@@ -4,56 +4,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Promoções do Supermercado</title>
+  <title>Painel de Ofertas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #1a1a1a;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
     }
     .painel {
-      text-align: center;
-      border: 5px solid red;
+      background: linear-gradient(145deg, #c60000, #800000);
+      color: white;
+      padding: 40px;
       border-radius: 20px;
-      padding: 30px;
-      background-color: #400;
-      max-width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+      animation: fadeIn 1s ease-in-out;
     }
     .produto {
-      font-size: 3em;
-      font-weight: bold;
+      font-family: 'Anton', sans-serif;
+      font-size: 4rem;
+      margin-bottom: 20px;
     }
     .preco {
-      font-size: 2em;
-      color: yellow;
-      margin-top: 10px;
+      font-size: 3rem;
+      color: #FFD700;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
     .validade {
-      font-size: 1.5em;
-      margin-top: 10px;
-      color: #ccc;
+      font-size: 1.5rem;
+      color: #cccccc;
     }
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
   <div class="painel" id="painel">
-    <div class="produto">Carregando promoção...</div>
+    <div class="produto">Carregando...</div>
   </div>
 
   <script>
     const promocoes = [
       { produto: "Contra Filé Bovino", preco: "De R$ 49,90 por R$ 38,90/kg", validade: "30/05" },
-      { produto: "Frango Resfriado Inteiro", preco: "R$ 8,90/kg", validade: "31/05" },
+      { produto: "Frango Resfriado", preco: "R$ 8,90/kg", validade: "31/05" },
       { produto: "Linguiça Toscana", preco: "R$ 17,90/kg", validade: "29/05" }
     ];
 
@@ -71,7 +74,7 @@
     }
 
     atualizarPainel();
-    setInterval(atualizarPainel, 5000); // Troca a cada 5 segundos
+    setInterval(atualizarPainel, 5000);
   </script>
 </body>
 </html>
