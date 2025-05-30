@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Painel de Ofertas - Piovani JB</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&amp;display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+  }
+  .wrapper {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .topbar {
+    background: #FFD700;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+  }
+  .carrossel {
+    display: flex;
+    width: 400vw;
+    transition: transform 1s ease-in-out;
+  }
+  .setor {
+    width: 100vw;
+    padding: 20px;
+    position: relative;
+  }
+  .titulo {
+    font-size: 2.5rem;
+    text-align: center;
+    background: #FFD700;
+    color: #000;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0 25px;
+  }
+  .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 20px;
+}
+  .card {
+    background: #b30000;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 15px #ffd700;
+    position: relative;
+    min-height: 180px;
+    transition: all 0.3s ease;
+  }
+  .card.destaque {
+    border: 3px solid gold;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 20px gold;
+  }
+  .card.destaque::before {
+    content: "TOP";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.9em;
+  }
+  .icone {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.3rem;
+  }
+  .produto {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .preco {
+    font-size: 2.4rem;
+    color: #FFD700;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    text-shadow: 0 0 8px #FFD700;
+  }
+  .validade {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  .selo {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: linear-gradient(to bottom, #ff0, #e6c200);
+    color: #b30000;
+    padding: 8px 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    animation: flutuar 1.6s infinite ease-in-out;
+  }
+  .rodape {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    background: #000;
+    font-size: 1rem;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+  }
+  .logo {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    width: 120px;
+    z-index: 998;
+  }
+  .relogio {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #FFD700;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+
+
+.setor-acougue .card { border: 3px solid #8B0000; box-shadow: 0 0 15px #8B0000aa; }
+.setor-hortifruti .card { border: 3px solid #228B22; box-shadow: 0 0 15px #228B22aa; }
+.setor-padaria .card { border: 3px solid #DAA520; box-shadow: 0 0 15px #DAA520aa; }
+.setor-destaques .card { border: 3px solid #800080; box-shadow: 0 0 15px #800080aa; }
+.setor-geral .card { border: 3px solid #1E90FF; box-shadow: 0 0 15px #1E90FFaa; }
+
+.setor-acougue .titulo { color: #8B0000; }
+.setor-hortifruti .titulo { color: #228B22; }
+.setor-padaria .titulo { color: #DAA520; }
+.setor-destaques .titulo { color: #800080; }
+.setor-geral .titulo { color: #1E90FF; }
+</style>
+
+<style>
+.setor-acougue .card { background-color: #8B0000; box-shadow: 0 0 20px #FF4500; }
+.setor-padaria .card { background-color: #A0522D; box-shadow: 0 0 20px #FFD700; }
+.setor-hortifruti .card { background-color: #006400; box-shadow: 0 0 20px #32CD32; }
+.setor-destaques .card, .setor-geral .card {
+  background-color: #003366;
+  box-shadow: 0 0 20px #00BFFF;
+}
+</style>
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #fff; }
+  50% { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff8c00; }
+  100% { text-shadow: 0 0 5px #fff; }
+}
+.setor {
+  animation: fadeIn 1s ease-in-out;
+}
+.setor h2 {
+  animation: glow 3s infinite alternate;
+}
+</style>
+
+</head>
+<body>
+
+<div class="contador-promocao" style="text-align:center; font-size: 24px; margin: 10px; color: #00FFD9;">
+    ⏳ Tempo restante da promoção: <span id="contador"></span>
+</div>
+<script>
+    let segundosRestantes = 20215;
+    function atualizarContador() {
+        const horas = String(Math.floor(segundosRestantes / 3600)).padStart(2, '0');
+        const minutos = String(Math.floor((segundosRestantes % 3600) / 60)).padStart(2, '0');
+        const segundos = String(segundosRestantes % 60).padStart(2, '0');
+        document.getElementById("contador").textContent = `${horas}h ${minutos}min ${segundos}s`;
+        if (segundosRestantes > 0) {
+            segundosRestantes--;
+            setTimeout(atualizarContador, 1000);
+        } else {
+            document.getElementById("contador").textContent = "Promoção encerrada!";
+        }
+    }
+    atualizarContador();
+</script>
+
+<div class="wrapper">
+<div class="topbar">PIOVANI SUPERMERCADOS JB • SUA ECONOMIA É AQUI</div>
+<div class="carrossel" id="carrossel">
+<div class="setor setor-acougue">
+<div class="titulo">🥩 Ofertas do Açougue</div>
+<div class="grid">
+<div class="card">
+<div class="icone">🥩</div>
+<div class="produto">Filé Mignon</div>
+<div class="preco">R$ 49,90/kg</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-28%</div>
+</div>
+<div class="card">
+<div class="icone">🍖</div>
+<div class="produto">Costelinha Suína</div>
+<div class="preco">R$ 27,90/kg</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-16%</div>
+</div>
+<div class="card"><div class="icone">🥩</div><div class="selo">-30%</div><div class="produto">Contra Filé</div><div class="preco">R$ 38,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🐔</div><div class="selo">-10%</div><div class="produto">Figado Bovino</div><div class="preco">R$ 8,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🐔</div><div class="selo">-10%</div><div class="produto">Peixe Emp</div><div class="preco">R$ 8,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🐔</div><div class="selo">-10%</div><div class="produto">Alcatra c maminha</div><div class="preco">R$ 8,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🐔</div><div class="selo">-10%</div><div class="produto">Picanha</div><div class="preco">R$ 49,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🐔</div><div class="selo">-10%</div><div class="produto">Frango</div><div class="preco">R$ 8,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+</div>
+</div>
+<div class="setor setor-padaria">
+<div class="titulo">🍞 🥐 Ofertas da Padaria</div>
+<div class="grid">
+<div class="card">
+<div class="icone">🍩</div>
+<div class="produto">Rosquinha</div>
+<div class="preco">R$ 5,99/pct</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-10%</div>
+</div>
+<div class="card">
+<div class="icone">🥐</div>
+<div class="produto">Croissant</div>
+<div class="preco">R$ 6,90/un</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-12%</div>
+</div>
+<div class="card"><div class="icone">🥖</div><div class="selo">-15%</div><div class="produto">Brigadeirão</div><div class="preco">R$ 7,49/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥖</div><div class="selo">-15%</div><div class="produto">Biscoito da Casa</div><div class="preco">R$ 7,49/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥖</div><div class="selo">-15%</div><div class="produto">Pão Francês</div><div class="preco">R$ 7,49/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍰</div><div class="selo">-20%</div><div class="produto">Bolo de Festa</div><div class="preco">R$ 22,90/un</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍰</div><div class="selo">-20%</div><div class="produto">Bolo Gelatina</div><div class="preco">R$ 22,90/un</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍰</div><div class="selo">-20%</div><div class="produto">Bolo Goiabada</div><div class="preco">R$ 22,90/un</div><div class="validade">Válido até: 30/05</div></div>
+</div>
+</div>
+<div class="setor setor-hortifruti">
+<div class="titulo">🥦 Ofertas do Hortifruti</div>
+<div class="grid">
+<div class="card">
+<div class="icone">🍎</div>
+<div class="produto">Maçã Nacional</div>
+<div class="preco">R$ 3,99/kg</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-10%</div>
+</div>
+<div class="card">
+<div class="icone">🥦</div>
+<div class="produto">Brócolis Ninja</div>
+<div class="preco">R$ 4,49/un</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-12%</div>
+</div>
+<div class="card"><div class="icone">🍅</div><div class="selo">-10%</div><div class="produto">Limão</div><div class="preco">R$ 5,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍅</div><div class="selo">-10%</div><div class="produto">Laranja</div><div class="preco">R$ 5,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍅</div><div class="selo">-10%</div><div class="produto">Kiwi</div><div class="preco">R$ 5,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍅</div><div class="selo">-10%</div><div class="produto">Goiaba</div><div class="preco">R$ 5,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🍅</div><div class="selo">-10%</div><div class="produto">Kaqui</div><div class="preco">R$ 5,90/kg</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥔</div><div class="selo">-12%</div><div class="produto">Batata</div><div class="preco">R$ 3,79/kg</div><div class="validade">Válido até: 30/05</div></div>
+</div>
+</div>
+<div class="setor setor-geral">
+<div class="titulo">🛒 Ofertas em Geral</div>
+<div class="grid">
+<div class="card">
+<div class="icone">🧀</div>
+<div class="produto">Queijo Mussarela</div>
+<div class="preco">R$ 32,90/kg</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-15%</div>
+</div>
+<div class="card">
+<div class="icone">🥫</div>
+<div class="produto">Molho de Tomate</div>
+<div class="preco">R$ 2,79/un</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-18%</div>
+</div>
+<div class="card">
+<div class="icone">🥤</div>
+<div class="produto">Refrigerante Lata</div>
+<div class="preco">R$ 3,49/un</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-25%</div>
+</div>
+<div class="card">
+<div class="icone">🍪</div>
+<div class="produto">Biscoito Recheado</div>
+<div class="preco">R$ 2,99/pct</div>
+<div class="validade">Válido até: 30/05</div>
+<div class="selo">-30%</div>
+</div>
+<div class="card"><div class="icone">🧃</div><div class="selo">-18%</div><div class="produto">Suco Prat’s</div><div class="preco">R$ 4,90/un</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥫</div><div class="selo">-22%</div><div class="produto">Milho Verde</div><div class="preco">R$ 2,50/un</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥫</div><div class="selo">-22%</div><div class="produto">Cafe 3 corações</div><div class="preco">R$ 2,50/un</div><div class="validade">Válido até: 30/05</div></div>
+<div class="card"><div class="icone">🥫</div><div class="selo">-22%</div><div class="produto">Bolamel 5k</div><div class="preco">R$ 2,50/un</div><div class="validade">Válido até: 30/05</div></div>
+</div>
+</div>
+</div>
+<div class="rodape">Ofertas válidas somente hoje • Consulte condições no caixa</div>
+<img class="logo" src="logopiovani.PNG"/>
+<div class="relogio" id="relogio">--:--</div>
+</div>
+<script>
+    function atualizaRelogio() {
+      const agora = new Date();
+      const h = agora.getHours().toString().padStart(2, '0');
+      const m = agora.getMinutes().toString().padStart(2, '0');
+      document.getElementById('relogio').textContent = `${h}:${m}`;
+    }
+    setInterval(atualizaRelogio, 1000);
+    atualizaRelogio();
+
+    // Carrossel automático
+    let indice = 0;
+    setInterval(() => {
+      indice = (indice + 1) % 4;
+      document.getElementById("carrossel").style.transform = `translateX(-${indice * 100}vw)`;
+    }, 8000);
+  </script>
+<style>
+.setor-acougue .card { border: 3px solid #8B0000; box-shadow: 0 0 15px #8B0000aa; }
+.setor-hortifruti .card { border: 3px solid #228B22; box-shadow: 0 0 15px #228B22aa; }
+.setor-padaria .card { border: 3px solid #DAA520; box-shadow: 0 0 15px #DAA520aa; }
+.setor-destaques .card { border: 3px solid #800080; box-shadow: 0 0 15px #800080aa; }
+.setor-geral .card { border: 3px solid #1E90FF; box-shadow: 0 0 15px #1E90FFaa; }
+
+.setor-acougue .titulo { color: #8B0000; }
+.setor-hortifruti .titulo { color: #228B22; }
+.setor-padaria .titulo { color: #DAA520; }
+.setor-destaques .titulo { color: #800080; }
+.setor-geral .titulo { color: #1E90FF; }
+</style>
+</body>
+
+</html>
